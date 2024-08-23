@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ict.mydream.interview.InterviewDao">
+    <select id="getName" parameterType="int" resultType="String">
+        select name from tbmember where memno=#{memno}
+    </select>
+
+    <select id="getCnsno" parameterType="int" resultType="Integer">
+        SELECT CNSNO FROM TBMEMBERCONSULT WHERE memno=#{memno} AND useyn = 'Y'
+    </select>
+
+    <select id="getQuestion" parameterType="Integer" resultType="Map">
+        <![CDATA[
+        SELECT AIQNO AS "totalqno", aiquestion AS "totalq", 1 AS "inttypecd"
+        FROM (
+            SELECT AIQNO, aiquestion
+            FROM TBAIQUESTION
+            ORDER BY DBMS_RANDOM.VALUE
+        )
+        WHERE ROWNUM <= 5]]>
+        <if test="cnsno != null">
+            UNION
+            SELECT cnsqno, QUESTION, 2
+            FROM (
+                SELECT cnsqno, QUESTION
+                FROM TBCNSQUESTION
+                WHERE CNSNO = #{cnsno}
+                ORDER BY DBMS_RANDOM.VALUE
+            )
+            WHERE ROWNUM <![CDATA[<]]>= 2
+        </if>
+        ORDER BY 3, 1
+    </select>
+
+    <select id="getIntTypeName" parameterType="int" resultType="String">
+        SELECT get_cmmcdname('INTTYPECD',#{inttypecd})
+        FROM dual
+    </select>
+    
+    <insert id="setIntRes" parameterType="intresvo">
+        <!-- 시퀀스 값을 미리 조회하여 intno에 저장 -->
+        <selectKey keyProperty="intno" resultType="int" order="BEFORE">
+            SELECT SEQ_INTNO.NEXTVAL FROM DUAL
+        </selectKey>
+        
+        <!-- INSERT 문에서 intno 값을 사용 -->
+        INSERT INTO TBINTRES (INTNO, MEMNO, INTTYPECD, REVIEWDT, CREDT, UPDDT) 
+        VALUES (#{intno}, #{memno}, #{inttypecd}, sysdate, sysdate, sysdate)
+    </insert>
+
+    <insert id="setIntDetail" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" separator=" ">
+            <choose>
+                <when test="item.aiqno != 0">
+                    INTO TBINTDETAIL (
+                        INTNO, QNO, AIQNO, QUESTION, ANSWER,
+                        ECNTGOOD, ECNTSOSO, ECNTBAD, PBADCNT, VHERTZ, 
+                        VJITTER, VSPEED, AIFEEDBK, CREDT, UPDDT, ESCORE, PSCORE, VSCORE
+                    ) VALUES (
+                        #{item.intno}, #{item.qno}, #{item.aiqno}, #{item.question}, #{item.answer, jdbcType=CLOB},
+                        #{item.ecntgood}, #{item.ecntsoso}, #{item.ecntbad}, #{item.pbadcnt}, #{item.vhertz}, 
+                        #{item.vjitter}, #{item.vspeed}, #{item.aifeedbk}, SYSDATE, SYSDATE, #{item.escore}, #{item.pscore}, #{item.vscore}
+                    )
+                </when>
+                <otherwise>
+                    <if test="item.cnsqno != 0">
+                        INTO TBINTDETAIL (
+                            INTNO, QNO, CNSQNO, QUESTION, ANSWER,
+                            ECNTGOOD, ECNTSOSO, ECNTBAD, PBADCNT, VHERTZ, 
+                            VJITTER, VSPEED, AIFEEDBK, CREDT, UPDDT, ESCORE, PSCORE, VSCORE
+                        ) VALUES (
+                            #{item.intno}, #{item.qno}, #{item.cnsqno}, #{item.question}, #{item.answer, jdbcType=CLOB},
+                            #{item.ecntgood}, #{item.ecntsoso}, #{item.ecntbad}, #{item.pbadcnt}, #{item.vhertz}, 
+                            #{item.vjitter}, #{item.vspeed}, #{item.aifeedbk}, SYSDATE, SYSDATE, #{item.escore}, #{item.pscore}, #{item.vscore}
+                        )
+                    </if>
+                </otherwise>
+            </choose>
+        </foreach>
+        SELECT * FROM dual
+    </insert>
+
+
+    <insert id="setIntFeedbk" parameterType="intfeedbkvo">
+        INSERT INTO TBINTFEEDBK (FEEDNO,INTNO,EFEED1,EFEED2,PFEED1,PFEED2,VFEED1,VFEED2,STTFEED1,STTFEED2, CREDT, UPDDT)
+        VALUES(seq_feedno.nextval, #{intno}, #{efeed1},#{efeed2},#{pfeed1},#{pfeed2},#{vfeed1},#{vfeed2},#{sttfeed1},#{sttfeed2}, SYSDATE, SYSDATE)
+    </insert>
+
+    <select id="getResNameTime" parameterType="int" resultType="java.util.Map" >
+        SELECT NAME AS "mname" ,(SELECT TO_CHAR(SYSDATE, 'yyyy-mm-dd') FROM dual) AS "resdate" FROM tbmember WHERE memno=#{memno}
+    </select>
+
+</mapper>

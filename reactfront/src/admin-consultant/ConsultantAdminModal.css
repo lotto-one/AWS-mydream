@@ -1,0 +1,181 @@
+.consult-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.consult-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.consult-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.consult-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.consult-form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.consult-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+input, select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.1rem;
+}
+
+.consult-career-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.consult-career-item input {
+  flex: 1;
+}
+
+.consult-career-item button {
+  background-color: #de1616;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.consult-career-item button:hover {
+  background-color: #941717;
+}
+
+.consult-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.consult-form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.consult-form-actions button:first-child {
+  background-color: #1659de;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
+.consult-form-actions button:first-child:hover {
+  background-color: #0d2452;
+}
+
+.consult-form-actions button:last-child {
+  background-color: #de1616;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.1rem;
+  font-weight: bolder;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.consult-form-actions button:last-child:hover{
+  background-color:  #941717;
+}
+
+/* 직접 입력 필드 스타일 */
+.consult-form-group select + input {
+  margin-top: 10px;
+}
+
+/* 경력/학력 추가 버튼 스타일 */
+.consult-form-group > button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.1rem;
+  font-weight: bolder;
+  width: 20%;
+  margin: 0 auto;
+}
+
+.consult-form-group > button:hover {
+  background-color: #2e6e31;
+}
+
+/* .password-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.password-toggle {
+  padding: 8px 12px;
+  background-color: #1659de;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.password-toggle:hover {
+  background-color: #0d2452;
+} */

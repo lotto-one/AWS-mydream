@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+   <!-- <mapper namespace="kr.ict.mydream.dao.CalendarDao">   -->
+   <mapper namespace="kr.ict.mydream.calendar.CalendarDao">
+	
+	<insert id="add" parameterType="schedulevo">
+		INSERT INTO TBSCHEDULE (SCHNO, MEMNO, STARTDT, ENDDT, TITLE, CONTENT, CREDT, UPDDT)
+	    	 VALUES(SEQ_SCHNO.nextval, #{memno}, #{startdt}, #{enddt}, #{title}, '내용없음', sysdate , sysdate)
+	</insert>
+	
+	<select id="list" parameterType="schedulevo" resultType="schedulevo">
+		SELECT SCHNO, MEMNO, STARTDT, ENDDT, TITLE, CONTENT, CREDT, UPDDT
+		FROM TBSCHEDULE
+		WHERE memno = #{memno}
+		AND ( startdt BETWEEN #{startdt} AND SUBSTR(#{startdt},1,8)||'31'
+		 	 OR enddt BETWEEN #{startdt} AND SUBSTR(#{startdt},1,8)||'31')
+	</select> 
+
+	<update id="update" parameterType="schedulevo">
+	 UPDATE TBSCHEDULE
+		SET TITLE = #{title} 
+		  , STARTDT = SUBSTR(#{startdt},1,10)
+		  ,	ENDDT = SUBSTR(#{enddt},1,10)
+		  ,	UPDDT = SYSDATE
+	  WHERE SCHNO = #{schno}
+	</update>
+	
+	<delete id="delete" parameterType="schedulevo">
+		DELETE 
+		  FROM TBSCHEDULE
+		 WHERE SCHNO = #{schno}
+	</delete>
+	
+   </mapper>
+ 

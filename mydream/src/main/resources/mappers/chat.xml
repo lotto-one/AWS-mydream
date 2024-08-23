@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ict.mydream.chat.ChatDao">
+
+    <select id="chatDetail" parameterType="int" resultType="chatdetailvo">
+        select * from tbchatdetail where chtno=(SELECT Max(chtno) FROM tbchatroom WHERE memno=#{memno})
+    </select>
+
+    <insert id="chatSave" parameterType="chatdetailvo">
+        INSERT INTO tbchatdetail VALUES(#{chtno},NVL((SELECT MAX(seqno) FROM tbchatdetail WHERE chtno=#{chtno}),0)+1,
+        #{chatdiv},#{content},sysdate)
+    </insert>
+
+    <select id="chackRoom" parameterType="int" resultType="int">
+        SELECT MAX(chtno) FROM tbchatroom WHERE memno=#{memnp}
+    </select>
+
+    <select id="chatpro" resultType="map" parameterType="membervo">
+        SELECT m.nickname AS UNICK, m.IMGNAME AS UIMG, c.NAME AS CNAME, c.IMGNAME AS CIMG
+        FROM TBMEMBER m, TBCONSULT c, 
+        (SELECT memno, cnsno, chtno FROM TBCHATROOM WHERE memno=#{memno} ORDER BY chtno DESC) r 
+        WHERE r.cnsno = c.cnsno AND r.memno = m.memno AND rownum = 1
+    </select>
+
+    <select id="getchatcroom" parameterType="chatroomvo" resultType="int">
+        select chtno from tbchatroom where memno=#{memno} and cnsno=#{cnsno}
+    </select>
+</mapper>

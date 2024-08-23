@@ -1,0 +1,265 @@
+/* AI Test */
+.personal-title {
+  text-shadow: 1px 1px 0 #444;
+  font-weight: bold; /* 글씨를 굵게 만듭니다 */
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.personal-flex-container {
+  display: flex;
+}
+
+.personal-image p {
+  font-weight: bold;
+  font-size: 20px;
+  /* text-shadow:1px 1px 0 #444;  */
+}
+
+.personal-image img {
+  /* border: 1px solid #ccc; 테두리 스타일 및 색상 설정 */
+  border-radius: 3px; /* 테두리의 모서리를 둥글게 만듭니다. */
+  padding: 8px; /* 테두리와 이미지 사이의 간격을 조정합니다. */
+  margin: 30px 20px 50px 20px;
+  height: 450px;
+  width: 450px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+}
+
+.personal-palette {
+  margin: 30px 20px 50px 20px;
+  height: 450px;
+}
+
+.personal-palette table {
+  width: 704px;
+  height: 450px;
+  border-collapse: collapse;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: rgba(218, 218, 218, 0.3);
+  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
+.personal-palette th {
+  text-shadow: 1px 1px 0 #444;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 1.5rem;
+}
+.personal-palette td {
+  text-shadow: 0.3px 0.3px 0 #444;
+  padding: 10px;
+  text-align: center;
+  /* font-size: 1.2rem; */
+}
+
+.tone-title {
+  margin: 0 auto;
+}
+
+.personal-switch {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.personal-btn-grp {
+  margin: 20px;
+}
+
+.personal-btn {
+  padding: 10px 20px;
+  border-radius: 3px;
+}
+.personal-btn:hover {
+  color: white;
+}
+
+.personal-highcharts {
+  width: 704px;
+  border-radius: 3px;
+  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  /* margin: 0 20px 0 20px; */
+  padding: 25px;
+  background-color: rgba(218, 218, 218, 0.3);
+}
+
+.personal-style1 {
+  width: 704px;
+  border-radius: 3px;
+  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  /* margin: 0 20px 0 20px; */
+  padding: 25px;
+  background-image: url("/mydream/img/Personal_image/background.png");
+}
+.personal-style2 {
+  width: 704px;
+  border-radius: 3px;
+  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  /* margin: 0 20px 0 20px; */
+  padding: 25px;
+  background-image: url("/mydream/img/Personal_image/background.png");
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+}
+.personal-style-img {
+  height: 400px;
+  margin-bottom: 20px;
+}
+.personal-style-textbox {
+  min-height: 400px;
+  min-width: 190px;
+}
+.personal-style-textbox1 {
+  border: 2px solid rgba(109, 109, 109, 0.3);
+  height: 384px;
+  margin-top: 16px;
+  margin-left: 15px;
+  width: 210px;
+}
+.personal-style-text {
+  padding: 10px;
+  padding-top: 20px;
+  line-height: 1.6;
+  word-break: keep-all; /* 단어가 중간에 끊기지 않도록 설정 */
+  font-weight: 500;
+  font-size: 14px;
+}
+.personal-style-text p {
+  font-size: 1rem;
+  margin: 0 0 15px; /* 각 문단 사이에 약간의 여백 */
+}
+
+.personal-makeupSlide {
+  padding: 10px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.personal-target-img {
+  border-radius: 15px; /* Adjust the value as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s; /* Smooth transition */
+  border: 2px solid #ccc; /* 테두리 스타일 및 색상 설정 */
+  border-radius: 100%; /* 테두리의 모서리를 둥글게 만듭니다. */
+  padding: 5px; /* 테두리와 이미지 사이의 간격을 조정합니다. */
+  width: 250px;
+  height: 250px;
+  background-color: white;
+}
+
+.personal-target-img:hover {
+  transform: scale(1.2); /* Slightly increase the size */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darken the shadow */
+  cursor: pointer;
+}
+.rounded-image {
+  text-shadow: 1px 1px 0 #444;
+}
+
+.content1 p {
+  font-size: 20px;
+  font-weight: bold;
+}
+.personal-makeup-img img {
+  border-radius: 3px; /* 테두리의 모서리를 둥글게 만듭니다. */
+  padding: 8px; /* 테두리와 이미지 사이의 간격을 조정합니다. */
+  margin: 50px 20px 50px 20px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+  width: 350px;
+  height: 350px;
+  margin: 10px 40px 40px 40px;
+}
+
+.personal-makeup-img p {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.personal-target p {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.personal-tab .list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+.personal-tab .list li {
+  margin-right: 20px;
+}
+
+.personal-tab li a {
+  text-decoration: none;
+  color: #000;
+  padding: 10px;
+  display: inline-block;
+}
+
+.personal-tab {
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+
+.res-button-start {
+  /* height: 60px; */
+  border-radius: 3px 0 0 0;
+  margin-top: 3px;
+  width: 120px;
+  align-content: center;
+  background-color: rgba(218, 218, 218, 0.3);
+  color: black;
+  font-size: 18px;
+  text-align: center; /* 텍스트를 중앙에 정렬 */
+
+  border: none; /* 기본 테두리 제거 */
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* 배경색과 그림자 변경에 부드러운 전환 효과 추가 */
+}
+.res-button-end {
+  /* height: 60px; */
+  border-radius: 0 3px 0 0;
+  margin-top: 3px;
+  width: 120px;
+  align-content: center;
+  background-color: rgba(218, 218, 218, 0.3);
+  color: black;
+  font-size: 18px;
+  text-align: center; /* 텍스트를 중앙에 정렬 */
+  padding: 10px;
+  border: none; /* 기본 테두리 제거 */
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* 배경색과 그림자 변경에 부드러운 전환 효과 추가 */
+}
+
+.res-button-end:hover {
+  background-color: #868484;
+}
+
+.res-button-start:hover {
+  background-color: #868484;
+}
+.personal-highcharts p {
+  font-size: 25px;
+}
+
+.personal-con {
+  margin: 0 20px auto 20px;
+}
+.swiper-button-prev {
+  margin-right: 100px;
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="kr.ict.mydream.member.login.MemberLoginDAO">
+    <!-- 사용자 이름으로 사용자 조회 -->
+    <select id="findByEmail" parameterType="String" resultType="membervo">
+        SELECT memno, email,nickname, password, rolecd FROM tbmember WHERE email = #{email}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="registerMember" parameterType="membervo">
+        INSERT INTO tbmember (memno, email, password, nickname, name, gendercd, birthymd, entymd, loccd, imgname,categcd, phonenum, credt, upddt,rolecd) VALUES (seq_memno.nextVal, #{email}, #{password}, #{nickname}, #{name}, #{gendercd}, #{birthymd}, TO_CHAR(sysdate, 'YYYYMMDD'), #{loccd}, 'default.png', #{categcd}, #{phonenum}, sysdate, sysdate,'M')
+    </insert>
+
+    <!-- 회원정보 수정 -->
+    <update id="updateProfile" parameterType="membervo">
+        UPDATE tbmember
+        SET
+        nickname = #{nickname},
+        categcd = #{categcd},    
+        loccd = #{loccd}
+        WHERE memno = #{memno}
+    </update>
+
+
+        <select id="mypage" parameterType="int" resultType="membervo">
+            select memno, email, nickname, name, (get_cmmcdname('GENDERCD',gendercd)) as gendercd, birthymd, entymd, loccd, imgname,categcd,(get_cmmcdname('SEASONCD',seasoncd)) as seasoncd, phonenum, credt, upddt,rolecd from tbmember where memno = #{memno}
+    </select>
+
+    <update id="updateImage" parameterType="membervo">
+        UPDATE tbmember
+        SET
+        imgname = #{imgname}
+        WHERE memno = #{memno}
+    </update>
+
+
+     <!-- 현재 비밀번호를 가져옵니다 -->
+   <select id="getPasswordByMemno" resultType="string">
+    SELECT password
+    FROM tbmember
+    WHERE memno = #{memno}
+</select>
+
+<update id="updatePassword">
+    UPDATE tbmember
+    SET password = #{newPassword}
+    WHERE memno = #{memno}
+</update>
+
+    <!-- 로그인 기록 삽입 -->
+    <insert id="insertLoginRecord" parameterType="loginvo">
+    INSERT INTO tblogin (logno, memno, logindt)
+    VALUES (SEQ_LOGNO.NEXTVAL, #{memno}, SYSDATE)
+</insert>
+
+<select id="selectLastInsertId" resultType="int">
+    SELECT SEQ_LOGNO.CURRVAL FROM dual
+</select>
+
+    <!-- 로그아웃 기록 업데이트 -->
+    <update id="updateLogoutRecord" parameterType="int">
+        UPDATE tblogin
+        SET logoutdt = sysdate
+        WHERE logno = #{logno}
+    </update>
+
+    <select id="deletemember" parameterType="int">
+        Delete from tbmember where memno= #{memno}
+    </select>
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ict.mydream.itvres.ItvDao">
+    <select id="itvAttitudeList" parameterType="int" resultType="java.util.Map"> 
+        select m.name as mname, a.intno as intno, a.memno as memno, a.credt as credt from tbmember m join tbintres a on m.memno = a.memno where a.inttypecd = '1' and m.memno = #{memno} ORDER BY m.name DESC
+    </select>
+    <select id="itvCareerList" parameterType="int" resultType="java.util.Map">
+        select m.name as mname, a.intno as intno, a.memno as memno, a.credt as credt from tbmember m join tbintres a on m.memno = a.memno where a.inttypecd = '2' and m.memno = #{memno} ORDER BY m.name DESC
+    </select>
+
+    <select id="detail" parameterType="int" resultType="kr.ict.mydream.dto.ItvDTO">
+        select m.name as mname, a.credt as credt, a.cnsfeedbk as cnsfeedbk, f.efeed1 as efeed1,f.efeed2 as efeed2,f.pfeed1 as pfeed1,f.pfeed2 as pfeed2, f.vfeed1 as vfeed1,
+            f.vfeed2 as vfeed2, f.sttfeed1 as sttfeed1, f.sttfeed2 as sttfeed2, d.question as question, a.intno as intno, d.qno as qno 
+            from tbmember m join tbintres a on m.memno = a.memno join tbintdetail d on a.intno = d.intno join tbintfeedbk f on a.intno = f.intno where a.intno = #{intno} order by 1 desc
+    </select>
+
+    <select id="faceData" parameterType="int" resultType="Integer">
+        select escore from tbintdetail where intno = #{intno}
+    </select>
+
+    <select id="getBarData" parameterType="int" resultType="int">
+        select pbadcnt from tbintdetail where intno = #{intno}
+    </select>
+
+    <select id="wordCloud" parameterType="int" resultType="String">
+        select answer from tbintdetail where intno = #{intno}
+    </select>
+
+    <select id="getVoiceData" parameterType="int" resultType="java.util.Map">
+        select vhertz, vjitter, vspeed from tbintdetail where intno = #{intno}
+    </select>
+
+    <select id="questionData" parameterType="int" resultType="java.util.Map">
+        select question , to_char(answer) as answer, to_char(aifeedbk) as aifeedbk from tbintdetail where intno = #{intno}
+    </select>
+
+    <select id="ctFeedbackList" parameterType="int" resultType="String">
+        select to_char(c.qcnsfeedbk) as qcnsfeedbk from tbintdetail d join tbconsulteval c on d.intno = c.intno and d.qno = c.qno where d.intno = #{intno}
+    </select>
+
+    <update id="rateUpdate" parameterType="java.util.Map">
+        update tbintres set reviewscore = #{reviewscore}, reviewdt = sysdate WHERE intno = #{intno}
+    </update>
+
+</mapper>

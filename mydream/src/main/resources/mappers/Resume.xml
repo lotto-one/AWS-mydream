@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ict.mydream.resume.ResumeDao">
+    <!-- 이력서 리스트 -->
+    <select id="resumeList" parameterType="int" resultType="resumevo">
+        select rsmno, title, upddt, memno from tbresume where memno=#{num} order by rsmno desc
+    </select>
+    <!-- 이력서 상세보기 -->
+    <select id="resumeDetail" parameterType="int" resultType="resumevo">
+        select * from tbresume where rsmno=#{num}
+    </select>
+    <select id="resumeDetailEdu" parameterType="int" resultType="educationvo">
+        select * from tbeducation where rsmno=#{num} order by seqno asc
+    </select>
+    <select id="resumeDetailCar" parameterType="int" resultType="careervo">
+        select * from tbcareer where rsmno=#{num} order by seqno asc
+    </select>
+    <select id="resumeDetailSelf" parameterType="int" resultType="selfintrovo">
+        select * from tbselfintro where rsmno=#{num} order by seqno asc
+    </select>
+    <!-- 이력서 추가 -->
+    <insert id="resumeAdd" parameterType="resumevo">
+        INSERT INTO tbresume VALUES (seq_rsmno.NEXTVAL, #{memno}, #{title}, #{name}, 'default.png', #{addr}, #{birthymd}, #{email}, #{mphonenum}, #{hphonenum}, sysdate, sysdate)
+        <selectKey keyProperty="rsmno" resultType="int" order="AFTER">
+            select max(rsmno) from tbresume
+        </selectKey>
+    </insert>
+    <insert id="resumeAddEdu" parameterType="map">
+        <selectKey keyProperty="seqno" resultType="int" order="BEFORE">
+            SELECT COALESCE(MAX(seqno), 0) + 1 FROM tbeducation WHERE rsmno = #{rsmno}
+        </selectKey>
+        INSERT INTO tbeducation VALUES (#{rsmno}, #{seqno}, #{entymd}, #{gradeymd}, #{schoolname}, #{major}, #{gradeuateyn}, #{gradescore}, sysdate, sysdate)
+    </insert>
+    <insert id="resumeAddCar" parameterType="map">
+        <selectKey keyProperty="seqno" resultType="int" order="BEFORE">
+            SELECT COALESCE(MAX(seqno), 0) + 1 FROM tbcareer WHERE rsmno = #{rsmno}
+        </selectKey>
+        INSERT INTO tbcareer VALUES (#{rsmno}, #{seqno}, #{entymd}, #{quitymd}, #{compname}, #{jobclass}, #{maintask}, #{jobposition}, sysdate, sysdate)
+    </insert>
+    <insert id="resumeAddSelf" parameterType="map">
+        <selectKey keyProperty="seqno" resultType="int" order="BEFORE">
+            SELECT COALESCE(MAX(seqno), 0) + 1 FROM tbselfintro WHERE rsmno = #{rsmno}
+        </selectKey>
+        INSERT INTO tbselfintro VALUES (#{rsmno}, #{seqno}, #{title}, #{content}, sysdate, sysdate)
+    </insert>
+    <!-- 이력서 수정 -->
+    <update id="resumeUpdate" parameterType="map">
+        UPDATE tbresume SET title= #{title}, name=#{name}, addr=#{addr}, birthymd=#{birthymd}, email=#{email}, mphonenum=#{mphonenum}, hphonenum=#{hphonenum}, upddt=SYSDATE WHERE rsmno=#{rsmno}
+    </update>
+    <update id="resumeUpdateEdu" parameterType="map">
+        UPDATE tbeducation SET entymd=#{entymd}, gradeymd=#{gradeymd}, schoolname=#{schoolname}, major=#{major}, gradeuateyn=#{gradeuateyn}, gradescore=#{gradescore}, upddt=SYSDATE WHERE rsmno=#{rsmno} AND seqno=#{seqno}
+    </update>
+    <update id="resumeUpdateCar" parameterType="map">
+        UPDATE tbcareer SET entymd=#{entymd}, quitymd=#{quitymd}, compname=#{compname}, jobclass=#{jobclass}, maintask=#{maintask}, jobposition=#{jobposition}, upddt=SYSDATE WHERE rsmno=#{rsmno} AND seqno=#{seqno}
+    </update>
+    <update id="resumeUpdateSelf" parameterType="map">
+        UPDATE tbselfintro SET title=#{title}, content=#{content}, upddt=SYSDATE WHERE rsmno=#{rsmno} AND seqno=#{seqno}
+    </update>
+    <!-- 이력서 삭제 -->
+    <delete id="resumeDeleteEdu" parameterType="map">
+        DELETE FROM tbeducation WHERE rsmno=#{rsmno}
+        <if test="seqno != null">
+        AND seqno=#{seqno}
+        </if>
+    </delete>
+    <delete id="resumeDeleteCar" parameterType="map">
+        DELETE FROM tbcareer WHERE rsmno=#{rsmno}
+        <if test="seqno != null">
+        AND seqno=#{seqno}
+        </if>
+    </delete>
+    <delete id="resumeDeleteSelf" parameterType="map">
+        DELETE FROM tbselfintro WHERE rsmno=#{rsmno}
+        <if test="seqno != null">
+        AND seqno=#{seqno}
+        </if>
+    </delete>
+    <delete id="resumeDelete" parameterType="map">
+        DELETE FROM tbresume where rsmno=#{rsmno}
+    </delete>
+    <!-- 면접사진 추가 -->
+    <update id="resumeImgUp" parameterType="map">
+ 		update tbresume set imgname = #{imgname} where rsmno=#{rsmno} and memno=#{memno}
+ 	</update>
+</mapper>

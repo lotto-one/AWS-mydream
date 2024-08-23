@@ -1,0 +1,49 @@
+.OTO-main-con {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  overflow-y: auto;
+  height: 589px;
+}
+
+.OTO-main-con-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.OTO-main-profileImgBox {
+  flex: 1 1 30%;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+.OTO-main-profileImg {
+  width: 200px;
+  height: 200px;
+}
+
+.OTO-main-txtbox {
+  text-align: center;
+}
+
+.OTO-main-h5 {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.OTO-main-msg {
+  font-size: 22px;
+  text-decoration: none;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .OTO-main-con-row {
+    flex-direction: column;
+  }
+
+  .OTO-main-profileImgBox {
+    flex: 1 1 100%;
+  }
+}

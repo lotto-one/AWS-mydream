@@ -1,0 +1,190 @@
+.cv-container{
+    width: 90%;
+    min-height: 800px;
+    /* height: 100%; */
+    margin: auto;
+    color:#010202;
+    border-radius: 3px;
+    /* padding: 1% 5%; */
+}
+
+.blockquote-CV{
+    margin: 0%;
+    display: block;
+    background: #fff;
+    padding: 20px 20px 10px 45px;
+    position: relative;
+    font-size: 0.35em;
+    line-height: 1.5;
+    color: #11045e;
+    -moz-box-shadow: 2px 2px 15px #ccc;
+    -webkit-box-shadow: 2px 2px 15px #ccc;
+    box-shadow: 2px 2px 15px #ccc;
+    border-left-style: solid;
+    border-left-width: 15px;
+    /* border-right-style: solid; */
+    border-right-width: 0px;
+  }
+  
+.CVtitle{
+    width: 100%;
+    margin: auto;
+    margin-bottom: 4.5%;
+    text-align: left;
+    color: #ffffff;
+    font-size: 5em;
+
+}
+
+.cv-notice{
+    background: #9a9a9a1f;
+    padding: 18px 40px 3px 40px;
+    text-align: left;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    border-radius: 8px;
+}
+
+.cv-subtitle{
+    font-size: 28px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.cv-listform {
+
+    background: #9a9a9a1f;
+    min-height: 200px;
+    border-radius: 3px;
+    padding: 25px 25px 25px 5% ;
+    border-radius: 8px;   
+    
+}
+
+.cv-listform-nolist {
+    display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  border: 2px solid #CDCDCD; /* 제공된 스타일 적용 */
+  min-height: 200px; /* 제공된 스타일 적용 */
+  border-radius: 3px; /* 제공된 스타일 적용 */
+  padding: 25px; /* 제공된 스타일 적용 */
+  background-color: #fff; /* 배경색을 흰색으로 설정 */
+    
+}
+.cv-nolist-img{
+    margin-left: 80px;
+    width: 100px; /* 이미지 크기를 조정 */
+  height: auto;
+  margin-right: 50px; /* 이미지와 텍스트 사이의 간격을 조정 */
+}
+
+.cv-nolist-text {
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+}
+.cv-list {
+    display: flex;
+    width: 1000px;
+    /* align-items: center; */
+}
+
+.cv-cvtitle {
+    width: 700px;
+    height: 50px;
+    /* border: 2px solid #113280; */
+    border-radius: 5px;
+    margin-right: 10px; /* 버튼과의 간격을 위한 여백 */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    padding:13px;
+    text-align: left;
+    line-height: 1.5;
+    padding-left: 30px;
+    font-size: 1.1em;
+    font-weight: 550;
+    color: #11045e;;
+    transition: background-color 0.3s ease;
+}
+.cv-cvtitle:hover {
+    line-height: 1.1;
+    border: 3px solid #11045e;;
+    
+}
+
+.cvbtn-area{
+    width: 200px;
+}
+
+
+.cv-upbtn {
+    padding: 10px 25px 10px;
+    margin-right: 2%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background-color:  #102669;
+    color: #fff;
+    transition: background-color 0.5s, color 0.5s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    
+}
+.cv-upbtn:hover {
+    background-color: #dfdcff;
+    color: #102669;
+    
+}
+.cv-delbtn {
+    padding: 10px 25px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background-color:  #cc0505;
+    color: #fff;
+    transition: background-color 0.5s, color 0.5s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.cv-delbtn:hover {
+    background-color: #fcc4c4;
+    
+}
+.cv-update-date{
+    width: 100px;
+}
+.cv-tr1 > th {
+    font-size: 1.4em;
+    font-weight: 700;
+}
+.cv-tr1{
+    height: 50px;
+}
+.cv-tr2{
+    height: 60px;
+}
+.cv-dwrite{
+    margin-top: 30px;
+    float: right;
+}
+.cv-writebtn{
+    width: 180px;
+    padding: 10px 25px 10px;
+    margin-right: 2%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background-color:  #102669;
+    color: #fff;
+    transition: background-color 0.5s, color 0.5s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+/* 호버 상태에서 배경색 변경 */
+.cv-writebtn:hover {
+    background-color: #dfdcff;
+    color: #102669;
+    
+}

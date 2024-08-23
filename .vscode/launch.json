@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MydreamApplicationTests",
+            "request": "launch",
+            "mainClass": "kr.ict.mydream.MydreamApplicationTests",
+            "projectName": "mydream"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MydreamApplication<mydream>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "kr.ict.mydream.MydreamApplication",
+            "projectName": "mydream",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-YourdreamApplication<yourdream>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "kr.co.ict.yourdream.YourdreamApplication",
+            "projectName": "yourdream",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

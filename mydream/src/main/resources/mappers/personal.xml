@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ict.mydream.personal.PersonalDao">
+    <update id="makeUpUpdate" parameterType="membervo">
+        update tbmember set imgname=#{imgname} where memno=#{memno}
+    </update>
+    <update id="seasonUpdate" parameterType="membervo">
+        update tbmember set seasoncd=#{seasoncd} where memno=#{memno}
+    </update>
+    <select id="getgender" parameterType="int" resultType="string">
+        SELECT get_cmmcdname('GENDERCD',(SELECT gendercd FROM TBMEMBER WHERE MEMNO=#{memno})) FROM dual
+    </select>
+</mapper>

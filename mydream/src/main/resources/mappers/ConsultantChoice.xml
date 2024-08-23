@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ict.mydream.consultantchoice.ConsultantChoiceDao">
+
+<!-- 컨설턴트 리스트 -->
+<resultMap id="cnscareerMap" type="consultvo">
+    <id property="cnsno" column="cnsno" />
+    <result property = "name" column="name" />
+    <result property = "email" column="email" />
+    <result property = "imgname" column="imgname" />
+    <result property = "introduce" column="introduce" />
+    
+    <result property = "category" column="category" />
+    <collection  property="cnscareerVO" ofType="cnscareervo">
+        <id property="seqno" column="seqno" />
+        <result property = "cnsno" column="cnsno" />
+        <result property = "term" column="term" />
+        <result property = "content" column="content" />
+        <result property = "detail" column="detail" />
+        <result property = "careerdiv" column="careerdiv" />
+    </collection>
+</resultMap>
+<!-- 컨설턴트 리스트 -->
+<select id="consultantList" resultMap="cnscareerMap">
+   SELECT a.cnsno, a.name, a.email, a.introduce, a.imgname,
+   b.seqno, b.term, b.CONTENT, b.detail, GET_CMMCDNAME('CAREERDIV', b.CAREERDIV) AS careerdiv, GET_CMMCDNAME('CATEGCD',a.categcd) AS category 
+   FROM TBCONSULT a, TBCNSCAREER b WHERE a.CNSNO = b.CNSNO and a.rolecd = 'C'
+</select>
+<!-- 컨설턴트 유무 -->
+<select id="consultantUse" parameterType="int" resultType="map">
+    SELECT cnsno, COUNT(*) as cnt FROM TBMEMBERCONSULT WHERE MEMNO=#{memno} AND useyn='Y' GROUP BY cnsno
+</select>
+<!-- 컨설턴트 신청 로그 유무 -->
+<select id="consultantHistyory" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM TBMEMBERCONSULT WHERE MEMNO=#{memno} AND CNSNO=#{cnsno}
+</select>
+<!-- 컨설턴트 신청 (insert) -->
+<insert id="consultantAppl" parameterType="map">
+    INSERT INTO TBMEMBERCONSULT VALUES(#{memno}, #{cnsno}, 'Y', SYSDATE, SYSDATE)
+</insert>
+<!-- 컨설턴트 신청 (update) -->
+<update id="consultantApplUp" parameterType="map">
+    UPDATE TBMEMBERCONSULT SET useyn='Y', upddt=sysdate WHERE memno=#{memno} AND cnsno=#{cnsno}
+</update>
+<!-- 컨설턴트 취소 -->
+<update id="consultantCancle" parameterType="int">
+    UPDATE TBMEMBERCONSULT SET useyn = 'N', upddt=sysdate WHERE memno = #{memno}
+</update>
+<!-- 컨설턴트 챗룸 생성 -->
+<insert id="consultantChatCreate" parameterType="map">
+    INSERT INTO TBCHATROOM VALUES(seq_chtno.NEXTVAL, #{memno}, #{cnsno}, '채팅방', SYSDATE, SYSDATE)
+</insert>
+</mapper>

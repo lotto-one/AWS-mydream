@@ -1,0 +1,309 @@
+.container1 {
+  text-align: center;
+  /* width: 1280px; */
+  background-color: white;
+}
+
+.landing-img {
+  display: block;
+  width: 100%;
+  height: 100vh; /* 전체 화면 높이 */
+  object-fit: cover; /* 이미지 비율을 유지하면서 꽉 채우기 */
+  margin: 0;
+  padding: 0;
+}
+
+.section {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  /* background-color: white; */
+}
+
+.video-section {
+  height: 100%; /* 첫 번째 섹션 높이를 화면 전체 높이로 설정 */
+  position: relative;
+}
+.joinAndLogin2 {
+  position: absolute;
+  width: 260px;
+  left: 91%;
+  top: 0.5%;
+  padding: 5px 10px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: rgb(255, 255, 255);
+  background-color: #dbdbdb00;
+  border: 0px #00000000;
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+.joinAndLogin2:hover {
+  color: #090358;
+  box-shadow: 3px 3px 3px #acacac;
+}
+
+.blockquote-con {
+  background-color: #ffffff00;
+}
+
+.image-section {
+  height: 100%; /* 두 번째 섹션 높이를 화면 전체 높이로 설정 */
+  position: relative; /* 부모 요소로서의 position: relative 추가 */
+}
+
+.main-td {
+  width: 50%;
+  height: 54vh; /* 테이블의 각 셀이 화면의 절반 크기가 되도록 설정 */
+  margin: 0;
+  padding: 0;
+  position: relative; /* 셀에 position: relative 추가 */
+}
+
+/*홈페이지소개*/
+
+.blockquote-main {
+  display: block;
+  background: #fff;
+  padding: 25px 20px 25px 45px;
+  margin: 150px 150px 150px;
+  position: relative;
+
+  /*Font*/
+  font-size: 2.5em;
+  line-height: 1.3;
+  color: #11045e;
+
+  /*Box Shadow - (Optional)*/
+  -moz-box-shadow: 2px 2px 15px #ccc;
+  -webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;
+
+  /*Borders - (Optional)*/
+  border-left-style: solid;
+  border-left-width: 15px;
+  border-right-style: solid;
+  border-right-width: 2px;
+}
+
+.highlight {
+  color: rgb(32, 194, 194); /* 원하는 색상으로 변경 */
+}
+
+.talk {
+  text-align: left;
+  /* background-color: #bd38a710; */
+}
+
+.talk_left {
+  margin: 0 5% 5% 10%;
+}
+.talk_right {
+  margin-bottom: 5%;
+  text-align: right;
+  margin-left: 25%;
+  margin-right: 10%;
+}
+
+.talk_left .info-img {
+  height: 180px;
+  width: 180px;
+  border-radius: 150px;
+  margin-top: 20px;
+  display: inline;
+}
+
+.talk_left .t_person_txt {
+  align-items: center;
+  background-color: #e8eefa;
+  border-radius: 40px;
+  display: flex inline;
+  font-size: 1.5em;
+  font-weight: 700;
+  height: 70px;
+  margin-left: 2%;
+  justify-content: center;
+  position: relative;
+  width: 660px;
+  margin-bottom: 5px;
+  padding-top: 20px;
+}
+
+.talk_left > .t_person_txt:before {
+  background: url(/mydream/img/Main_image/point.png) no-repeat;
+  bottom: 20px;
+  content: "";
+  height: 26px;
+  left: -5px;
+  position: absolute;
+  width: 38px;
+}
+/* .talk_right{
+  align-items: flex-end;
+} */
+
+.talk_right .info-img {
+  height: 180px;
+  width: 180px;
+  border-radius: 150px;
+  margin-top: 20px;
+  display: inline;
+  margin-left: 2%;
+  /* margin-bottom: 10%; */
+}
+.talk_right > .t_person_txt:before {
+  background: url(/mydream//img/Main_image/point.png) no-repeat;
+  bottom: 20px;
+  content: "";
+  height: 26px;
+  position: absolute;
+  right: -15px;
+  width: 38px;
+}
+
+.talk_right .t_person_txt {
+  align-items: center;
+  background-color: #e8eefa;
+  border-radius: 40px;
+  display: flex inline;
+  font-size: 1.5em;
+  font-weight: 700;
+  height: 70px;
+  margin-left: 2%;
+  justify-content: center;
+  position: relative;
+  width: 660px;
+  margin-bottom: 5px;
+  /* margin-left: 30%; */
+  padding-top: 10px;
+}
+
+.t_person_txt p {
+  color: #11045e;
+}
+
+.interview {
+  text-align: center;
+  height: 450px; /* 원하는 높이 설정 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+  position: relative; /* 자식 요소의 절대 위치 지정 가능 */
+  margin-top: 15%;
+}
+
+.interview .info-img {
+  width: 90%;
+  position: absolute; /* 이미지를 절대 위치로 설정 */
+  top: -300px; /* 원하는 만큼 위쪽으로 이동 */
+  left: 50%; /* 수평 중앙 정렬 */
+  transform: translateX(-50%); /* 중앙 정렬을 위한 변환 */
+  min-width: 90%; /* 최소 너비를 100%로 설정 */
+  min-height: 100%; /* 최소 높이를 100%로 설정 */
+}
+
+.p-style {
+  /* margin: 5% 25%; */
+  /* background-color: aliceblue; */
+  color: #ffffff;
+  font-size: 1.7em;
+  font-weight: 900;
+  text-align: center;
+  color: #000000;
+  padding: 0 0 10% 0;
+}
+
+.p-style blockquote {
+  display: block;
+  background: #fff;
+  padding: 25px 20px 25px 45px;
+  margin: 10% 5% 10%;
+  position: relative;
+
+  /*Font*/
+  font-size: 2.3em;
+  line-height: 1.2;
+  color: #11045e;
+
+  /*Box Shadow - (Optional)*/
+  -moz-box-shadow: 2px 2px 15px #ccc;
+  -webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;
+
+  /*Borders - (Optional)*/
+  border-left-style: solid;
+  border-left-width: 35px;
+  border-right-style: solid;
+  border-right-width: 2px;
+}
+
+/*information*/
+.p-point {
+  margin-top: 10%;
+  margin-left: 11%;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #000000;
+}
+
+.p-text {
+  margin-left: 12%;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #000000;
+}
+
+.info-right img {
+  width: 55%;
+  margin-left: 25%;
+  margin-top: 2%;
+  margin-bottom: 10%;
+}
+
+.info-left img {
+  width: 55%;
+  margin-left: 10%;
+  margin-top: 2%;
+  margin-bottom: 10%;
+}
+
+.info-right {
+  display: flex;
+  flex-direction: column; /* 수직 배치 */
+  align-items: flex-end; /* 우측 정렬 */
+  text-align: right; /* 텍스트를 우측 정렬 */
+  margin-right: 10%;
+}
+
+.info-left {
+  display: flex;
+  flex-direction: column; /* 수직 배치 */
+  align-items: flex-start; /* 좌측 정렬 */
+  text-align: left; /* 텍스트를 우측 정렬 */
+  background-color: #f0f6ff;
+}
+
+.p-point-end {
+  margin-top: 10%;
+  margin-bottom: 3%;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #000000;
+}
+
+.btns {
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.joinAndLogin {
+  /* border: 1px solid #ccc; */
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #000000;
+  color: white;
+  width: 350px;
+  height: 100px;
+  font-size: 2em;
+}

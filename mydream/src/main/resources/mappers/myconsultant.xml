@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ict.mydream.myconsultant.MyConsultDao">
+ <select id="findCon" parameterType="int" resultType="memberconsultvo">
+    SELECT * FROM tbmemberconsult WHERE memno=#{memno} AND USEYN='Y'
+ </select>
+
+
+     <!-- ConsultVO에 대한 ResultMap -->
+     <resultMap id="ConsultResultMap" type="ConsultVO">
+      <result property="name" column="NAME"/>
+      <result property="categcd" column="CATEGCD"/>
+      <result property="email" column="EMAIL"/>
+      <result property="introduce" column="INTRODUCE"/>
+      <result property="imgname" column="IMGNAME"/>
+      <result property="cnscareer" column="CNSCAREER"/>
+      <result property="cnsproject" column="CNSPROJECT"/>
+      
+      <!-- List<CnsCareerVO> 매핑 -->
+      <collection property="cnscareerVO" ofType="CnsCareerVO">
+          <result property="content" column="CONTENT"/>
+          <result property="detail" column="DETAIL"/>
+      </collection>
+  </resultMap>
+
+  <!-- SQL 쿼리 -->
+  <select id="selectConsultWithCareer" resultMap="ConsultResultMap" parameterType="int">
+      SELECT c.NAME,
+             (SELECT get_cmmcdname('CATEGCD', c.categcd) FROM dual) AS CATEGCD,
+             c.EMAIL,
+             c.INTRODUCE,
+             c.imgname,
+             c.CNSCAREER,
+             c.CNSPROJECT,
+             r.content,
+             r.DETAIL
+      FROM TBCONSULT c
+      JOIN TBCNSCAREER r ON c.cnsno = r.CNSNO
+      WHERE r.cnsno = #{cnsno}
+  </select>
+</mapper>

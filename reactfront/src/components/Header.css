@@ -1,0 +1,43 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  color: #333;
+  margin: auto;
+  height: 60px;
+  z-index: 1000;
+}
+.header.hidden {
+  transform: translateY(-100%);
+}
+.header-h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 30px;
+  color: black;
+  margin: auto;
+  padding: 20px 50px 15px 60px;
+  height: 60px;
+}
+.header-h5 {
+  display: inline;
+}
+.custom-underline {
+  color: black;
+  text-decoration: none;
+  position: relative;
+}
+.custom-underline::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 73px;
+  height: 1px;
+  background: black;
+}

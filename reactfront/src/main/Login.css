@@ -1,0 +1,72 @@
+/* 로그인 페이지 전체 컨테이너 */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 화면의 전체 높이 */
+  gap: 20px; /* 제목과 로그인 박스 사이의 간격 */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 제목 스타일 */
+.login-h1 {
+  margin: 0;
+  font-size: 3.5rem;
+  font-weight: 1000;
+  text-align: center;
+  color: #333;
+  margin-top: -100px;
+  margin-bottom: 50px;
+}
+
+/* 로그인 박스들을 감싸는 컨테이너 */
+.login-box-container {
+  display: flex;
+  gap: 20px; /* 박스 사이의 간격 */
+}
+
+/* 각 로그인 박스 */
+.login-admin,
+.login-consul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px; /* 박스의 너비 */
+  height: 300px; /* 박스의 높이 */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.login-admin {
+  background-color: #0c1b49; /* 관리자 박스 배경 색상 */
+}
+
+.login-consul {
+  background-color: #0a6065; /* 컨설턴트 박스 배경 색상 */
+}
+
+/* 로그인 버튼 */
+.login-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f7fafe;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  background-color: #dad5f9;
+}
+

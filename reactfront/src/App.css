@@ -1,0 +1,32 @@
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0;
+  min-height: 100vh;
+  background: #ffffff no-repeat center center fixed;
+  background-size: cover;
+}
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+.sidebar-open .main-content {
+  margin-left: 300px;
+}
+.fixed-menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 2000;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}

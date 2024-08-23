@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ict.mydream.mainpage.MainPageDao">
+
+    <!-- 회원 정보 조회 -->
+    <select id="getMemberDetail" parameterType="int" resultType="membervo">
+        SELECT * FROM TBMEMBER WHERE MEMNO = #{memno}
+    </select>
+
+    <!-- 회원-컨설턴트 매핑 및 컨설턴트 정보 조회 -->
+    <resultMap id="memberConsultDetailMap" type="memberconsultvo">
+        <id property="memno" column="MEMNO"/>
+        <result property="cnsno" column="CNSNO"/>
+        <result property="useyn" column="USEYN"/>
+        <result property="credt" column="CREDT"/>
+        <result property="upddt" column="UPDDT"/>
+        <association property="consultant" javaType="consultvo">
+            <id property="cnsno" column="CNSNO"/>
+            <result property="name" column="NAME"/>
+            <result property="gendercd" column="GENDERCD"/>
+            <result property="categcd" column="CATEGCD"/>
+            <result property="email" column="EMAIL"/>
+            <result property="phonenum" column="PHONENUM"/>
+            <result property="birthymd" column="BIRTHYMD"/>
+            <result property="introduce" column="INTRODUCE"/>
+            <result property="quitymd" column="QUITYMD"/>
+            <result property="imgname" column="IMGNAME"/>
+            <result property="cnscareer" column="CNSCAREER"/>
+            <result property="cnsproject" column="CNSPROJECT"/>
+            <result property="credt" column="consultCredt"/>
+            <result property="upddt" column="consultUpddt"/>
+        </association>
+    </resultMap>
+    <select id="getMemberConsultantDetail" resultMap="memberConsultDetailMap">
+        SELECT 
+            mc.MEMNO, mc.CNSNO, mc.USEYN, mc.CREDT, mc.UPDDT, 
+            c.NAME, c.GENDERCD, c.CATEGCD, c.EMAIL, c.PHONENUM, c.BIRTHYMD,
+            c.INTRODUCE, c.QUITYMD, c.IMGNAME, c.CNSCAREER, c.CNSPROJECT,
+            c.CREDT as consultCredt, c.UPDDT as consultUpddt
+        FROM 
+            TBMEMBERCONSULT mc
+        JOIN 
+            TBCONSULT c ON mc.CNSNO = c.CNSNO
+        WHERE 
+            mc.MEMNO = #{memno} AND mc.USEYN='Y'
+    </select>    
+
+    <!-- 최신 감정 데이터 조회 -->
+    <select id="getLatestEmotionDetails" parameterType="map" resultType="intdetailvo">
+        SELECT d.intno, d.qno, d.escore
+        FROM TBINTDETAIL d
+        JOIN TBINTRES r ON d.intno = r.intno
+        WHERE d.intno = #{intno}
+        AND r.memno = #{memno}
+        AND d.upddt = (SELECT MAX(upddt) FROM TBINTDETAIL WHERE intno = #{intno})
+    </select>
+
+    <!-- 최신 음성 데이터 조회 -->
+    <select id="getLatestVoiceDetails" parameterType="map" resultType="intdetailvo">
+        SELECT d.intno, d.qno, d.vscore
+        FROM TBINTDETAIL d
+        JOIN TBINTRES r ON d.intno = r.intno
+        WHERE d.intno = #{intno}
+        AND r.memno = #{memno}
+        AND d.upddt = (SELECT MAX(upddt) FROM TBINTDETAIL WHERE intno = #{intno})
+    </select>
+
+    <!-- 최신 자세 데이터 조회 -->
+    <select id="getLatestPostureDetails" parameterType="map" resultType="intdetailvo">
+        SELECT d.intno, d.qno, d.pscore
+        FROM TBINTDETAIL d
+        JOIN TBINTRES r ON d.intno = r.intno
+        WHERE d.intno = #{intno}
+        AND r.memno = #{memno}
+        AND d.upddt = (SELECT MAX(upddt) FROM TBINTDETAIL WHERE intno = #{intno})
+    </select>
+
+    <!-- 최신 컨설턴트 평가 점수 조회 -->
+    <select id="getLatestConsultantScore" parameterType="map" resultType="IntResVO">
+        SELECT *
+        FROM TBINTRES
+        WHERE intno = #{intno} 
+        AND memno = #{memno}
+        AND upddt = (
+            SELECT MAX(upddt) 
+            FROM TBINTRES 
+            WHERE intno = #{intno} AND memno = #{memno}
+        )
+    </select>
+
+    <!-- 회원 일정 조회 -->
+    <select id="getSchedulesByMember" resultType="schedulevo">
+        SELECT * FROM TBSCHEDULE WHERE memno = #{memno}
+    </select> 
+
+    <!-- 컨설턴트 직무 질문&답변 STT -->
+    <select id="getConsultantQuestions" parameterType="map" resultType="intdetailvo">
+        SELECT *
+        FROM TBINTDETAIL
+        WHERE intno = #{intno}
+        AND qno IN
+        <foreach item="item" index="index" collection="qnos" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 컨설턴트 직무 답변 피드백-->
+    <select id="getConsultantFeedback" parameterType="map" resultType="consultevalvo">
+        SELECT *
+        FROM TBCONSULTEVAL
+        WHERE memno = #{memno}
+        AND cnsno = #{cnsno}
+        AND intno = #{intno}
+        AND qno IN
+        <foreach item="item" index="index" collection="qnos" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- ResultMap 정의 -->
+    <resultMap id="IntResVOResultMap" type="intresvo">
+        <!-- cnsfeedbk를 IntResVO의 필드로 매핑 -->
+        <result property="cnsfeedbk" column="cnsfeedbk" />
+    </resultMap>
+    <!-- 컨설턴트 피드백(총평) -->
+    <select id="getConsultantTotalFeedback" parameterType="map" resultMap="IntResVOResultMap">
+        SELECT cnsfeedbk 
+        FROM TBINTRES 
+        WHERE memno = #{memno} AND intno = #{intno}
+    </select>
+
+    <!-- 최근 5개의 면접 데이터-->
+    <select id="getInterviewDetails" parameterType="int" resultType="IntDetailVO">
+    <![CDATA[
+    SELECT 
+        d.intno, 
+        d.qno, 
+        AVG(d.ecntgood) AS ecntgood, 
+        AVG(d.ecntsoso) AS ecntsoso, 
+        AVG(d.ecntbad) AS ecntbad, 
+        AVG(d.escore) AS escore,
+        AVG(d.pscore) AS pscore,
+        AVG(d.vscore) AS vscore,
+        MAX(d.credt) AS credt,
+        MAX(d.upddt) AS upddt  
+    FROM TBINTDETAIL d
+    JOIN (
+        SELECT intno
+        FROM (
+            SELECT 
+                intno,
+                ROW_NUMBER() OVER (PARTITION BY memno ORDER BY credt DESC) AS rn
+            FROM TBINTRES
+            WHERE memno = #{memno}
+        ) r
+        WHERE r.rn <= 5
+    ) recent ON d.intno = recent.intno
+    GROUP BY d.intno, d.qno
+    ORDER BY d.intno, d.qno
+    ]]>
+    </select>
+
+
+    <select id="getLatestInterviewInfo" resultType="java.util.Map">
+    SELECT 
+        CAST(ir.intno AS INTEGER) as "intno", 
+        CAST(mc.cnsno AS INTEGER) as "cnsno"
+    FROM (
+        SELECT intno, memno
+        FROM TBINTRES
+        WHERE memno = #{memno}
+        ORDER BY credt DESC
+    ) ir
+    LEFT JOIN TBMEMBERCONSULT mc ON ir.memno = mc.memno
+    WHERE ROWNUM = 1
+    </select>
+
+</mapper>

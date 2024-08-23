@@ -1,0 +1,89 @@
+.feedback-main-con {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    overflow-y: auto;
+    height: 589px;
+  }
+  
+  .feedback-main-con-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .feedback-main-profileImgBox {
+    flex: 1 1 30%;
+    box-sizing: border-box;
+    margin: 10px;
+  }
+  
+  .feedback-main-profileImg {
+    width: 60%;
+    height: 100%;
+    border-radius: 100%;
+  }
+  
+  .feedback-main-txtbox {
+    text-align: center;
+  }
+  
+  .feedback-main-h5 {
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  .feedback-main-msg {
+    font-size: 22px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  @media (max-width: 768px) {
+    .feedback-main-con-row {
+      flex-direction: column;
+    }
+  
+    .feedback-main-profileImgBox {
+      flex: 1 1 100%;
+    }
+
+  }
+  .feedback-con-1 {
+    width: 90%;
+    background: #0A6065;
+    border-radius: 3px;
+    color: white;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.feedback-con-2{
+    width:100%; 
+    padding:0px 0px 0px 10px;
+}
+
+.feedback-con-3{
+    text-align:left;
+}
+.feedback-nextbtn{
+    width: 80px;
+    height: 35px;
+    background-color: #08877D;
+    border:1px solid #01665e;
+    border-radius: 3px;
+    color: #FFFCFC;
+    font-size: 15px;
+    margin: 5px;
+    transition: background-color 0.3s ease,
+    
+}
+/* 호버 상태에서 배경색 변경 */
+.feedback-nextbtn:hover {
+    background-color: #01665e;
+    
+}
+
+.feedback-imagebox {
+  height: 200px;
+}
